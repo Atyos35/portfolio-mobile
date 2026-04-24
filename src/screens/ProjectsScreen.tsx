@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TextStyle,
+  TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native';
@@ -22,6 +23,12 @@ export default function ProjectsScreen(): React.ReactElement {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => router.push('/')}
+      >
+        <Text style={styles.backButtonText}>← Retour</Text>
+      </TouchableOpacity>
       <Text style={styles.header}>Mes Projets</Text>
       <ProjectList
         projects={PROJECTS}
@@ -44,6 +51,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingHorizontal: 24,
     marginBottom: 24,
+  } as TextStyle,
+  backButton: {
+    paddingHorizontal: 24,
+    paddingTop: 16,
+    paddingBottom: 8,
+  } as ViewStyle,
+  backButtonText: {
+    color: '#6366f1',
+    fontSize: 16,
+    fontWeight: '600',
   } as TextStyle,
   scrollView: {
     paddingHorizontal: 24,

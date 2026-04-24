@@ -1,6 +1,6 @@
-import React from 'react';
-import { ImageStyle, StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, ViewStyle, TextStyle } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import React from 'react';
+import { Image, ImageStyle, ScrollView, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { PROJECTS } from '../data/projects';
 import { Project } from '../types/project';
 
@@ -16,7 +16,7 @@ export default function ProjectDetailScreen(): React.ReactElement {
         <Text style={styles.errorText}>Projet non trouvé</Text>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => router.back()}
+          onPress={() => router.push('/(tabs)/projects')}
         >
           <Text style={styles.backButtonText}>← Retour</Text>
         </TouchableOpacity>
@@ -28,7 +28,7 @@ export default function ProjectDetailScreen(): React.ReactElement {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <TouchableOpacity
         style={styles.backButton}
-        onPress={() => router.back()}
+        onPress={() => router.push('/(tabs)/projects')}
       >
         <Text style={styles.backButtonText}>← Retour</Text>
       </TouchableOpacity>
