@@ -1,6 +1,14 @@
+import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
+  const router = useRouter();
+
+  const handleViewProjects = (): void => {
+    router.push('/(tabs)/projects');
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Valérian</Text>
@@ -11,7 +19,7 @@ export default function HomeScreen() {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => console.log('Go to projects')}
+        onPress={handleViewProjects}
       >
         <Text style={styles.buttonText}>
           Voir mes projets

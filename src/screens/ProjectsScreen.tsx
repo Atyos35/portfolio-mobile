@@ -1,18 +1,23 @@
+import { useRouter } from 'expo-router';
 import React from 'react';
 import {
-    StyleSheet,
-    Text,
-    TextStyle,
-    View,
-    ViewStyle,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+  ViewStyle,
 } from 'react-native';
 import { ProjectList } from '../components/ProjectList';
 import { PROJECTS } from '../data/projects';
 
 export default function ProjectsScreen(): React.ReactElement {
+  const router = useRouter();
+
   const handleProjectPress = (projectId: string): void => {
-    console.log(`Navigate to project: ${projectId}`);
-    // TODO: Navigation vers détail du projet
+    router.push({
+      pathname: '/(tabs)/project/[id]',
+      params: { id: projectId },
+    });
   };
 
   return (
