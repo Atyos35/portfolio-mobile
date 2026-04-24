@@ -65,9 +65,6 @@ export default function ProjectDetailScreen(): React.ReactElement {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionButtonText}>Voir le code</Text>
-        </TouchableOpacity>
       </View>
 
       {/* Features interactives pour Food Social App */}
@@ -159,19 +156,6 @@ const styles = StyleSheet.create({
     color: '#6366f1',
     fontSize: 12,
     fontWeight: '600',
-  } as TextStyle,
-  actionButton: {
-    backgroundColor: '#6366f1',
-    paddingVertical: 16,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 40,
-  } as ViewStyle,
-  actionButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
   } as TextStyle,
   featuresSection: {
     marginTop: 24,
