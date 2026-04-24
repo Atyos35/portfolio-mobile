@@ -1,9 +1,5 @@
-import { Text, View } from 'react-native';
+import HomeScreen from '../src/screens/HomeScreen';
 
-export default function App() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
-      <Text>Portfolio Mobile</Text>
-    </View>
-  );
+export default function HomeTab() {
+  return <HomeScreen />;
 }
