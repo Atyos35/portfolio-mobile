@@ -22,9 +22,9 @@ export interface FeedPost {
   id: string;
   userId: string;
   userName: string;
-  userAvatar?: string;
+  userAvatar?: string | number;
   content: string;
-  image?: string;
+  image?: string | number;
   likes: number;
   comments: number;
   timestamp: string;
@@ -40,7 +40,7 @@ export interface FeedFeature extends ProjectFeature {
 export interface LikeableItem {
   id: string;
   title: string;
-  image: string;
+  image: string | number;
   likes: number;
   isLiked: boolean;
 }
@@ -67,7 +67,7 @@ export interface Recipe {
   id: string;
   title: string;
   description: string;
-  image: string;
+  image: string | number;
   prepTime: number; // minutes
   cookTime: number; // minutes
   servings: number;

@@ -1,8 +1,9 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
 import { Image, ImageStyle, ScrollView, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { FeatureRenderer } from '../components/features/FeatureRenderer';
 import { PROJECTS } from '../data/projects';
-import { Project } from '../types/project';
+import { Project, ProjectFeatureUnion } from '../types/project';
 
 export default function ProjectDetailScreen(): React.ReactElement {
   const router = useRouter();
@@ -68,6 +69,17 @@ export default function ProjectDetailScreen(): React.ReactElement {
           <Text style={styles.actionButtonText}>Voir le code</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Features interactives pour Food Social App */}
+      {project.features && project.features.length > 0 && (
+        <View style={styles.featuresSection}>
+          {project.features.map((feature: ProjectFeatureUnion) => (
+            <View key={feature.id} style={styles.featureContainer}>
+              <FeatureRenderer feature={feature} />
+            </View>
+          ))}
+        </View>
+      )}
     </ScrollView>
   );
 }
@@ -161,4 +173,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   } as TextStyle,
+  featuresSection: {
+    marginTop: 24,
+    borderTopWidth: 1,
+    borderTopColor: '#334155',
+  } as ViewStyle,
+  featureContainer: {
+    minHeight: 300,
+    borderBottomWidth: 1,
+    borderBottomColor: '#334155',
+    paddingBottom: 24,
+    marginBottom: 24,
+  } as ViewStyle,
 });
