@@ -1,56 +1,53 @@
-import type { FC } from 'react';
-import { Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-interface HomeScreenProps {
-  navigation?: any;
+export default function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Valérian</Text>
+
+      <Text style={styles.subtitle}>
+        Mobile Developer Portfolio
+      </Text>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => console.log('Go to projects')}
+      >
+        <Text style={styles.buttonText}>
+          Voir mes projets
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
-const HomeScreen: FC<HomeScreenProps> = () => {
-  const containerStyle: ViewStyle = {
+const styles = StyleSheet.create({
+  container: {
     flex: 1,
     backgroundColor: '#0f172a',
     padding: 24,
     justifyContent: 'center',
-  };
-
-  const titleStyle: TextStyle = {
+  },
+  title: {
     color: 'white',
     fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 12,
-  };
-
-  const subtitleStyle: TextStyle = {
+  },
+  subtitle: {
     color: '#94a3b8',
     fontSize: 16,
     marginBottom: 40,
-  };
-
-  const buttonStyle: ViewStyle = {
+  },
+  button: {
     backgroundColor: '#6366f1',
     padding: 16,
     borderRadius: 12,
-  };
-
-  const buttonTextStyle: TextStyle = {
+  },
+  buttonText: {
     color: 'white',
     textAlign: 'center',
     fontWeight: '600',
-  };
-
-  const handleProjectsPress = (): void => {
-    console.log('Go to projects');
-  };
-
-  return (
-    <View style={containerStyle}>
-      <Text style={titleStyle}>Valérian</Text>
-      <Text style={subtitleStyle}>Mobile Developer Portfolio</Text>
-      <TouchableOpacity style={buttonStyle} onPress={handleProjectsPress}>
-        <Text style={buttonTextStyle}>Voir mes projets</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-export default HomeScreen;
+  },
+});
