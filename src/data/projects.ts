@@ -175,10 +175,4 @@ export const PROJECTS: Project[] = [
       },
     ],
   },
-  {
-    id: '3',
-    title: 'Fitness Tracker',
-    description: 'Suivi de performance et dashboard utilisateur',
-    image: 'https://images.unsplash.com/photo-1571019613914-85f342c55f55',
-  },
 ];
