@@ -2,15 +2,15 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
 import {
-  Image,
-  ImageStyle,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
-  ViewStyle,
+    Image,
+    ImageStyle,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextStyle,
+    TouchableOpacity,
+    View,
+    ViewStyle,
 } from 'react-native';
 import { FeatureRenderer } from '../components/features/FeatureRenderer';
 import { PROJECTS } from '../data/projects';
@@ -47,7 +47,8 @@ export default function ProjectDetailScreen(): React.ReactElement {
     const projectTechStack = techStack[project.id] || ['React Native', 'TypeScript', 'Expo'];
 
     return (
-        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
             {/* Hero Image */}
             <View style={styles.heroContainer}>
                 <Image source={{ uri: project.image }} style={styles.heroImage} />
@@ -139,7 +140,8 @@ export default function ProjectDetailScreen(): React.ReactElement {
                 {/* Bottom padding */}
                 <View style={styles.bottomPadding} />
             </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 }
 
