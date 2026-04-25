@@ -22,7 +22,7 @@ const MAPPING: IconMapping = {
     'chevron.right': 'chevron-right',
     'location.fill': 'location-on',
     'github': 'code',
-    'linkedin': 'business',
+    'linkedin': 'work',
     'twitter': 'chat',
     'globe': 'language',
     'person.fill': 'person',

@@ -57,7 +57,7 @@ export default function ProfileScreen(): React.ReactElement {
         >
             {/* Header */}
             <View style={styles.header}>
-                <Text style={styles.headerTitle}>Profil & CV</Text>
+                <Text style={styles.headerTitle}>CV</Text>
                 <TouchableOpacity
                     style={styles.contactButton}
                     onPress={handleContactPress}

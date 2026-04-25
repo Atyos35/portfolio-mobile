@@ -134,7 +134,10 @@ export default function HomeScreen(): React.ReactElement {
                                 }
                             }}
                         >
-                            <IconSymbol name="linkedin" size={24} color={Colors.text.secondary} />
+                            <Image
+                                source={require('@/assets/images/linkedin.png')}
+                                style={styles.linkedinIcon}
+                            />
                         </TouchableOpacity>
                     )}
                     {profile.social.website && (
@@ -302,6 +305,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: Colors.border.subtle,
     } as ViewStyle,
+    linkedinIcon: {
+        width: 24,
+        height: 24,
+        resizeMode: 'contain',
+    } as ImageStyle,
     bottomPadding: {
         height: Spacing.xl,
     } as ViewStyle,
