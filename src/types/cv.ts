@@ -6,7 +6,7 @@
 // COMPÉTENCES
 // ============================================
 
-export type SkillCategory = 'frontend' | 'backend' | 'mobile' | 'tools' | 'design' | 'soft';
+export type SkillCategory = 'frontend' | 'backend' | 'mobile' | 'tools' | 'design' | 'soft' | 'langages';
 
 export interface Skill {
     id: string;

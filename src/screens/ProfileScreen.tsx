@@ -1,6 +1,9 @@
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import * as Linking from 'expo-linking';
 import React, { useMemo } from 'react';
 import {
+    Image,
+    ImageStyle,
     ScrollView,
     StyleSheet,
     Text,
@@ -19,6 +22,7 @@ const categoryConfig: Record<SkillCategory, { label: string; color: string }> = 
     frontend: { label: 'Frontend', color: Colors.primary.main },
     backend: { label: 'Backend', color: Colors.secondary.main },
     mobile: { label: 'Mobile', color: Colors.status.info },
+    langages: { label: 'Langages', color: Colors.primary.light },
     tools: { label: 'Outils', color: Colors.status.warning },
     design: { label: 'Design', color: Colors.status.success },
     soft: { label: 'Soft Skills', color: Colors.text.secondary },
@@ -46,7 +50,9 @@ export default function ProfileScreen(): React.ReactElement {
     };
 
     const handleContactPress = (): void => {
-        // In a real app, this would open email or contact form
+        if (cvData.profile.email) {
+            Linking.openURL(`mailto:${cvData.profile.email}`);
+        }
     };
 
     return (
@@ -71,9 +77,10 @@ export default function ProfileScreen(): React.ReactElement {
             <Card variant="elevated" padding="xl" style={styles.bioCard}>
                 <View style={styles.bioHeader}>
                     <View style={styles.avatarLarge}>
-                        <Text style={styles.avatarText}>
-                            {cvData.profile.name.charAt(0)}
-                        </Text>
+                        <Image
+                            source={require('@/assets/images/profile_picture.jpg')}
+                            style={styles.avatarImage}
+                        />
                     </View>
                     <View style={styles.bioInfo}>
                         <Text style={styles.name}>{cvData.profile.name}</Text>
@@ -250,15 +257,15 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
         borderRadius: 35,
-        backgroundColor: Colors.primary.main,
+        backgroundColor: Colors.background.tertiary,
+        overflow: 'hidden',
         justifyContent: 'center',
         alignItems: 'center',
     } as ViewStyle,
-    avatarText: {
-        color: Colors.background.primary,
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-    } as TextStyle,
+    avatarImage: {
+        width: '100%',
+        height: '100%',
+    } as ImageStyle,
     bioInfo: {
         flex: 1,
         marginLeft: Spacing.md,
@@ -347,7 +354,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         top: 30,
-        bottom: -20,
+        bottom: 0,
         width: 2,
         backgroundColor: Colors.border.subtle,
     } as ViewStyle,
