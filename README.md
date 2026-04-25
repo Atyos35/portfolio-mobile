@@ -105,45 +105,6 @@ BorderRadius.sm (4) -> full (9999)
 - **Tailles de texte** : Hiérarchie claire, lisibilité optimale
 - **Feedback tactile** : activeOpacity sur tous les TouchableOpacity
 
----
-
-## Démarrage
-
-### Prérequis
-- Node.js 18+
-- npm ou yarn
-- Expo CLI
-- iOS Simulator / Android Emulator (optionnel)
-
-### Installation
-```bash
-# 1. Cloner le projet
-git clone https://github.com/Atyos35/portfolio-mobile.git
-cd portfolio-mobile
-
-# 2. Installer les dépendances
-npm install
-
-# 3. Démarrer l'application
-npm start
-
-# 4. Ouvrir sur la plateforme souhaitée
-# - iOS: Press 'i'
-# - Android: Press 'a'
-# - Web: Press 'w'
-```
-
-### Build de Production
-```bash
-# Build pour iOS
-eas build --platform ios
-
-# Build pour Android
-eas build --platform android
-```
-
----
-
 ## Structure des Fichiers
 
 ```
@@ -169,36 +130,11 @@ portfolio-mobile/
 └── package.json
 ```
 
----
-
-## Commandes Utiles
-
-```bash
-# Développement
-npm start              # Démarrer Expo Dev Server
-npm run lint           # Vérifier le code avec ESLint
-npm run type-check     # Vérifier les types TypeScript
-
-# Build
-npm run build          # Build de production (selon plateforme)
-```
-
----
-
-## Captures d'Écran
-
-| Home | Profile | Projects | Detail |
-|------|---------|----------|--------|
-| ![Home](./assets/images/screenshot-home.png) | ![Profile](./assets/images/screenshot-profile.png) | ![Projects](./assets/images/screenshot-projects.png) | ![Detail](./assets/images/screenshot-detail.png) |
-
----
-
 ## Contact
 
-- **Email** : [contact@valerian.dev](mailto:contact@valerian.dev)
-- **GitHub** : [@atyos35](https://github.com/atyos35)
-- **LinkedIn** : [Valérian](https://linkedin.com/in/valerian)
-- **Site web** : [valerian.dev](https://valerian.dev)
+- **Email** : [valerian.guemene@gmail.com](mailto:valerian.guemene@gmail.com)
+- **GitHub** : [@atyos35](https://github.com/Atyos35/portfolio-mobile)
+- **LinkedIn** : [Valérian](https://www.linkedin.com/in/valerian-guemene/)
 
 ---
 
