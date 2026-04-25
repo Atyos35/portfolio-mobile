@@ -8,7 +8,7 @@ export const profile: Profile = {
     name: 'Valérian GUÉMENÉ',
     title: 'Développeur Web Full-Stack',
     tagline: "Concepteur de solutions applicatives et d'interfaces utilisateur modernes",
-    bio: "Concepteur développeur Full Stack, j'accompagne la conception et le développement d'applications web et mobiles modernes, performantes et centrées utilisateur. J'interviens aussi bien sur le front-end que sur le back-end, en m'appuyant sur des technologies comme Symfony ou Node.js (notamment avec NestJS), ainsi que sur des frameworks JavaScript en TypeScript côté interface. Mon approche allie exigence technique et sens du produit pour créer des solutions fiables, évolutives et adaptées aux besoins métiers.",
+    bio: "Développeur Full Stack freelance, j’accompagne mes clients dans la conception et la réalisation de leurs projets web et mobiles, de l’idée jusqu’à la mise en production. J’interviens aussi bien sur le front que sur le back pour créer des solutions modernes, performantes et réellement adaptées aux besoins métier.",
     location: 'Rennes, France',
     email: 'Valerian.guemene@gmail.com',
     social: {
@@ -22,6 +22,16 @@ export const profile: Profile = {
 // ============================================
 
 export const skills: Skill[] = [
+    // Mobile
+    { id: 'm1', name: 'React Native', category: 'mobile', level: 'expert' },
+    { id: 'm2', name: 'TypeScript', category: 'mobile', level: 'expert' },
+    { id: 'm3', name: 'Expo', category: 'mobile', level: 'expert' },
+    { id: 'm4', name: 'StyleSheet', category: 'mobile', level: 'expert' },
+    { id: 'm5', name: 'Reanimated', category: 'mobile', level: 'advanced' },
+    { id: 'm6', name: 'Axios', category: 'mobile', level: 'advanced' },
+    { id: 'm7', name: 'TanStack Query', category: 'mobile', level: 'advanced' },
+    { id: 'm8', name: 'Authentification JWT', category: 'mobile', level: 'advanced' },
+
     // Langages
     { id: 's1', name: 'PHP', category: 'langages', level: 'expert' },
     { id: 's2', name: 'TypeScript', category: 'langages', level: 'expert' },
@@ -144,7 +154,7 @@ export const experiences: Experience[] = [
         startDate: '2019-07',
         endDate: '2019-08',
         current: false,
-        description: "Projet réalisé en autonomie afin de se former sur Angular.",
+        description: "Conception et développement d'une application web intranet en autonomie.",
         achievements: [
             "Création d'une application web intranet complète",
             "Développement d'une API REST avec API Platform/Symfony",

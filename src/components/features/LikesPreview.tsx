@@ -13,6 +13,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { LikeableItem } from '../../types/project';
+import { SocialFoodColors } from './socialFoodTheme';
 
 interface LikesPreviewProps {
   items: LikeableItem[];
@@ -116,18 +117,19 @@ export const LikesPreview: React.FC<LikesPreviewProps> = ({ items, onLike }) => 
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#0f172a',
-    paddingVertical: 16,
+    backgroundColor: SocialFoodColors.background.primary,
+    paddingTop: 16,
+    paddingBottom: 44, // Extra padding for Android navigation bar
   } as ViewStyle,
   title: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 24,
     fontWeight: 'bold',
     paddingHorizontal: 20,
     marginBottom: 4,
   } as TextStyle,
   subtitle: {
-    color: '#94a3b8',
+    color: SocialFoodColors.text.secondary,
     fontSize: 14,
     paddingHorizontal: 20,
     marginBottom: 16,
@@ -138,23 +140,28 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   card: {
     width: 160,
-    backgroundColor: '#1e293b',
+    backgroundColor: SocialFoodColors.background.surface,
     borderRadius: 16,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: SocialFoodColors.border.subtle,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   } as ViewStyle,
   cardImage: {
     width: '100%',
     height: 120,
-    backgroundColor: '#334155',
+    backgroundColor: SocialFoodColors.background.secondary,
   } as ImageStyle,
   cardContent: {
     padding: 12,
     alignItems: 'center',
   } as ViewStyle,
   cardTitle: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 14,
     fontWeight: '600',
     textAlign: 'center',
@@ -167,7 +174,7 @@ const styles = StyleSheet.create({
     gap: 8,
     paddingHorizontal: 12,
     paddingVertical: 8,
-    backgroundColor: '#334155',
+    backgroundColor: SocialFoodColors.interactive.hover,
     borderRadius: 20,
   } as ViewStyle,
   heartContainer: {
@@ -178,11 +185,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
   } as TextStyle,
   likeCount: {
-    color: '#94a3b8',
+    color: SocialFoodColors.text.secondary,
     fontSize: 14,
     fontWeight: '600',
   } as TextStyle,
   likedCount: {
-    color: '#f43f5e',
+    color: SocialFoodColors.interactive.liked,
   } as TextStyle,
 });

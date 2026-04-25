@@ -19,8 +19,7 @@ import { Project, ProjectFeatureUnion } from '../types/project';
 
 // Tech stack data for projects
 const techStack: Record<string, string[]> = {
-    '1': ['React Native', 'TypeScript', 'Expo', 'React Navigation'],
-    '2': ['React Native', 'Firebase', 'TypeScript', 'Redux'],
+    '2': ['React Native', 'TypeScript', 'Expo', 'StyleSheet', 'Reanimated'],
 };
 
 export default function ProjectDetailScreen(): React.ReactElement {
@@ -85,9 +84,8 @@ export default function ProjectDetailScreen(): React.ReactElement {
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>À propos du projet</Text>
                     <Text style={styles.sectionText}>
-                        Ce projet showcase met en avant les compétences en développement mobile
-                        avec React Native et Expo. Il démontre la capacité à créer des
-                        applications modernes, performantes et esthétiques.
+                        Ce projet me permet de montrer concrètement ce que je sais faire en développement 
+                        mobile avec React Native et Expo, à travers une application moderne, performante et soignée.
                     </Text>
                 </View>
 

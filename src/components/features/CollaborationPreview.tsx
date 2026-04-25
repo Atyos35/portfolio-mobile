@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import {
-    Image,
-    ImageStyle,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextStyle,
-    TouchableOpacity,
-    View,
-    ViewStyle,
+  Image,
+  ImageStyle,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
 import { Collaborator } from '../../types/project';
+import { SocialFoodColors } from './socialFoodTheme';
 
 interface CollaborationPreviewProps {
   collaborators: Collaborator[];
@@ -30,12 +31,16 @@ const CollaboratorCard: React.FC<CollaboratorCardProps> = ({
     <TouchableOpacity
       style={styles.collaboratorCard}
       onPress={onPress}
-      activeOpacity={0.8}
+      activeOpacity={0.7}
     >
       <Image source={{ uri: collaborator.avatar }} style={styles.avatar} />
       <View style={styles.collaboratorInfo}>
         <Text style={styles.collaboratorName}>{collaborator.name}</Text>
         <Text style={styles.collaboratorRole}>{collaborator.role}</Text>
+      </View>
+      {/* Click indicator */}
+      <View style={styles.clickIndicator}>
+        <Text style={styles.clickArrow}>›</Text>
       </View>
     </TouchableOpacity>
   );
@@ -132,18 +137,19 @@ export const CollaborationPreview: React.FC<CollaborationPreviewProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#0f172a',
-    paddingVertical: 16,
+    backgroundColor: SocialFoodColors.background.primary,
+    paddingTop: 16,
+    paddingBottom: 44, // Extra padding for Android navigation bar
   } as ViewStyle,
   title: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 24,
     fontWeight: 'bold',
     paddingHorizontal: 20,
     marginBottom: 4,
   } as TextStyle,
   subtitle: {
-    color: '#94a3b8',
+    color: SocialFoodColors.text.secondary,
     fontSize: 14,
     paddingHorizontal: 20,
     marginBottom: 16,
@@ -156,34 +162,49 @@ const styles = StyleSheet.create({
   collaboratorCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#1e293b',
+    backgroundColor: SocialFoodColors.background.surface,
     borderRadius: 12,
     padding: 12,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: SocialFoodColors.border.subtle,
     minWidth: 280,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   } as ViewStyle,
   avatar: {
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#334155',
+    backgroundColor: SocialFoodColors.background.secondary,
   } as ImageStyle,
   collaboratorInfo: {
     marginLeft: 12,
     flex: 1,
   } as ViewStyle,
   collaboratorName: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 16,
     fontWeight: '600',
     marginBottom: 4,
   } as TextStyle,
   collaboratorRole: {
-    color: '#6366f1',
+    color: SocialFoodColors.accent.orange,
     fontSize: 13,
     fontWeight: '500',
+  } as TextStyle,
+  clickIndicator: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 8,
+  } as ViewStyle,
+  clickArrow: {
+    color: SocialFoodColors.accent.orange,
+    fontSize: 24,
+    fontWeight: 'bold',
   } as TextStyle,
   detailHeader: {
     paddingHorizontal: 20,
@@ -193,7 +214,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   } as ViewStyle,
   backButtonText: {
-    color: '#6366f1',
+    color: SocialFoodColors.accent.orange,
     fontSize: 16,
     fontWeight: '600',
   } as TextStyle,
@@ -205,17 +226,17 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: '#334155',
+    backgroundColor: SocialFoodColors.background.secondary,
     marginBottom: 16,
   } as ImageStyle,
   detailName: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 8,
   } as TextStyle,
   roleBadge: {
-    backgroundColor: '#6366f1',
+    backgroundColor: SocialFoodColors.accent.orange,
     paddingHorizontal: 16,
     paddingVertical: 6,
     borderRadius: 20,
@@ -227,14 +248,16 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   } as TextStyle,
   bioSection: {
-    backgroundColor: '#1e293b',
+    backgroundColor: SocialFoodColors.background.surface,
     padding: 16,
     borderRadius: 12,
     width: '100%',
     marginBottom: 24,
+    borderWidth: 1,
+    borderColor: SocialFoodColors.border.subtle,
   } as ViewStyle,
   bioLabel: {
-    color: '#64748b',
+    color: SocialFoodColors.text.muted,
     fontSize: 12,
     fontWeight: '600',
     textTransform: 'uppercase',
@@ -242,12 +265,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   } as TextStyle,
   bioText: {
-    color: '#cbd5e1',
+    color: SocialFoodColors.text.secondary,
     fontSize: 14,
     lineHeight: 20,
   } as TextStyle,
   contactButton: {
-    backgroundColor: '#6366f1',
+    backgroundColor: SocialFoodColors.accent.orange,
     paddingVertical: 14,
     paddingHorizontal: 32,
     borderRadius: 12,

@@ -11,6 +11,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Recipe } from '../../types/project';
+import { SocialFoodColors } from './socialFoodTheme';
 
 interface RecipeCreationPreviewProps {
   recipes: Recipe[];
@@ -31,7 +32,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onPress }) => {
     <TouchableOpacity
       style={styles.recipeCard}
       onPress={onPress}
-      activeOpacity={0.8}
+      activeOpacity={0.7}
     >
       <Image source={imageSource} style={styles.recipeImage} />
       <View style={styles.recipeContent}>
@@ -52,6 +53,11 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onPress }) => {
             <Text style={styles.metaIcon}>🍽️</Text>
             <Text style={styles.metaText}>{recipe.servings} pers.</Text>
           </View>
+        </View>
+        {/* Click indicator */}
+        <View style={styles.clickIndicator}>
+          <Text style={styles.clickText}>Voir la recette</Text>
+          <Text style={styles.clickArrow}>→</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -179,8 +185,9 @@ export const RecipeCreationPreview: React.FC<RecipeCreationPreviewProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f172a',
-    paddingVertical: 16,
+    backgroundColor: SocialFoodColors.background.primary,
+    paddingTop: 16,
+    paddingBottom: 44, // Extra padding for Android navigation bar
   } as ViewStyle,
   header: {
     flexDirection: 'row',
@@ -190,20 +197,20 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   } as ViewStyle,
   title: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 4,
   } as TextStyle,
   subtitle: {
-    color: '#94a3b8',
+    color: SocialFoodColors.text.secondary,
     fontSize: 14,
   } as TextStyle,
   createButton: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: '#6366f1',
+    backgroundColor: SocialFoodColors.accent.orange,
     justifyContent: 'center',
     alignItems: 'center',
   } as ViewStyle,
@@ -223,12 +230,12 @@ const styles = StyleSheet.create({
     marginRight: 16,
   } as ViewStyle,
   backButtonText: {
-    color: '#6366f1',
+    color: SocialFoodColors.accent.orange,
     fontSize: 16,
     fontWeight: '600',
   } as TextStyle,
   detailTitle: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 20,
     fontWeight: 'bold',
     flex: 1,
@@ -236,7 +243,7 @@ const styles = StyleSheet.create({
   detailImage: {
     width: '100%',
     height: 200,
-    backgroundColor: '#334155',
+    backgroundColor: SocialFoodColors.background.secondary,
     marginBottom: 16,
   } as ImageStyle,
   detailContent: {
@@ -249,21 +256,21 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   } as ViewStyle,
   metaBadge: {
-    backgroundColor: '#334155',
+    backgroundColor: SocialFoodColors.interactive.hover,
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 8,
   } as ViewStyle,
   metaBadgeText: {
-    color: '#cbd5e1',
+    color: SocialFoodColors.accent.orange,
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: '600',
   } as TextStyle,
   section: {
     marginBottom: 24,
   } as ViewStyle,
   sectionTitle: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 12,
@@ -274,12 +281,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   } as ViewStyle,
   ingredientBullet: {
-    color: '#6366f1',
+    color: SocialFoodColors.accent.orange,
     fontSize: 16,
     marginRight: 12,
   } as TextStyle,
   ingredientText: {
-    color: '#cbd5e1',
+    color: SocialFoodColors.text.secondary,
     fontSize: 14,
     flex: 1,
   } as TextStyle,
@@ -291,7 +298,7 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: '#6366f1',
+    backgroundColor: SocialFoodColors.accent.orange,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -302,54 +309,81 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   } as TextStyle,
   stepText: {
-    color: '#cbd5e1',
+    color: SocialFoodColors.text.secondary,
     fontSize: 14,
     lineHeight: 20,
     flex: 1,
     paddingTop: 4,
   } as TextStyle,
   authorSection: {
-    backgroundColor: '#1e293b',
+    backgroundColor: SocialFoodColors.background.surface,
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',
     marginTop: 8,
+    borderWidth: 1,
+    borderColor: SocialFoodColors.border.subtle,
   } as ViewStyle,
   authorLabel: {
-    color: '#64748b',
+    color: SocialFoodColors.text.muted,
     fontSize: 12,
     marginBottom: 4,
   } as TextStyle,
   authorName: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 16,
     fontWeight: '600',
   } as TextStyle,
   recipeCard: {
-    backgroundColor: '#1e293b',
+    backgroundColor: SocialFoodColors.background.surface,
     borderRadius: 16,
     overflow: 'hidden',
     marginBottom: 16,
     marginHorizontal: 16,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: SocialFoodColors.border.subtle,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   } as ViewStyle,
   recipeImage: {
     width: '100%',
     height: 150,
-    backgroundColor: '#334155',
+    backgroundColor: SocialFoodColors.background.secondary,
   } as ImageStyle,
   recipeContent: {
     padding: 16,
   } as ViewStyle,
+  clickIndicator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginTop: 8,
+    paddingTop: 8,
+    borderTopWidth: 1,
+    borderTopColor: SocialFoodColors.border.subtle,
+  } as ViewStyle,
+  clickText: {
+    color: SocialFoodColors.accent.orange,
+    fontSize: 13,
+    fontWeight: '600',
+  } as TextStyle,
+  clickArrow: {
+    color: SocialFoodColors.accent.orange,
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginLeft: 4,
+  } as TextStyle,
   recipeTitle: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
   } as TextStyle,
   recipeDescription: {
-    color: '#94a3b8',
+    color: SocialFoodColors.text.secondary,
     fontSize: 14,
     lineHeight: 20,
     marginBottom: 12,
@@ -367,7 +401,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   } as TextStyle,
   metaText: {
-    color: '#64748b',
+    color: SocialFoodColors.text.muted,
     fontSize: 13,
   } as TextStyle,
 });

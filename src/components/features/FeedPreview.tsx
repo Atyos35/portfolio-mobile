@@ -11,6 +11,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { FeedPost } from '../../types/project';
+import { SocialFoodColors } from './socialFoodTheme';
 
 interface FeedPreviewProps {
   posts: FeedPost[];
@@ -124,18 +125,19 @@ export const FeedPreview: React.FC<FeedPreviewProps> = ({ posts, onLike }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f172a',
-    paddingVertical: 16,
+    backgroundColor: SocialFoodColors.background.primary,
+    paddingTop: 16,
+    paddingBottom: 44, // Extra padding for Android navigation bar
   } as ViewStyle,
   title: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 24,
     fontWeight: 'bold',
     paddingHorizontal: 20,
     marginBottom: 4,
   } as TextStyle,
   subtitle: {
-    color: '#94a3b8',
+    color: SocialFoodColors.text.secondary,
     fontSize: 14,
     paddingHorizontal: 20,
     marginBottom: 16,
@@ -145,12 +147,17 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   } as ViewStyle,
   postCard: {
-    backgroundColor: '#1e293b',
+    backgroundColor: SocialFoodColors.background.surface,
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: SocialFoodColors.border.subtle,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
   } as ViewStyle,
   postHeader: {
     flexDirection: 'row',
@@ -161,24 +168,24 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#334155',
+    backgroundColor: SocialFoodColors.background.secondary,
   } as ImageStyle,
   userInfo: {
     marginLeft: 12,
     flex: 1,
   } as ViewStyle,
   userName: {
-    color: '#ffffff',
+    color: SocialFoodColors.text.primary,
     fontSize: 15,
     fontWeight: '600',
   } as TextStyle,
   timestamp: {
-    color: '#64748b',
+    color: SocialFoodColors.text.muted,
     fontSize: 12,
     marginTop: 2,
   } as TextStyle,
   postContent: {
-    color: '#cbd5e1',
+    color: SocialFoodColors.text.secondary,
     fontSize: 14,
     lineHeight: 20,
     marginBottom: 12,
@@ -187,13 +194,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     borderRadius: 12,
-    backgroundColor: '#334155',
+    backgroundColor: SocialFoodColors.background.secondary,
     marginBottom: 12,
   } as ImageStyle,
   postActions: {
     flexDirection: 'row',
     borderTopWidth: 1,
-    borderTopColor: '#334155',
+    borderTopColor: SocialFoodColors.border.subtle,
     paddingTop: 12,
     gap: 16,
   } as ViewStyle,
@@ -209,12 +216,12 @@ const styles = StyleSheet.create({
     transform: [{ scale: 1.2 }],
   } as TextStyle,
   actionText: {
-    color: '#94a3b8',
+    color: SocialFoodColors.text.secondary,
     fontSize: 13,
     fontWeight: '500',
   } as TextStyle,
   likedText: {
-    color: '#f43f5e',
+    color: SocialFoodColors.interactive.liked,
     fontWeight: '600',
   } as TextStyle,
 });
