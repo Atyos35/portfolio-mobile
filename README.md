@@ -1,4 +1,4 @@
-# Portfolio Mobile Interactif - Valérian 🚀
+# Portfolio Mobile Interactif
 
 > Développeur Full Stack Web & Mobile - React Native, TypeScript, Node.js
 
@@ -10,13 +10,13 @@ Application mobile portfolio interactive combinée à un CV, conçue comme un pr
 
 ---
 
-## 📱 Fonctionnalités
+## Fonctionnalités
 
 ### Écrans
-- **🏠 Home** : Présentation développeur avec photo, nom, titre, boutons d'action et statistiques
-- **👤 Profile (CV)** : Bio complète, compétences catégorisées, expériences en timeline, formation
-- **📁 Projects** : Liste de projets avec cards interactives et navigation fluide
-- **🔍 Project Detail** : Hero image, stack technique, fonctionnalités et **aperçus interactifs**
+- **Home** : Présentation développeur avec photo, nom, titre, boutons d'action et statistiques
+- **Profile (CV)** : Bio complète, compétences catégorisées, expériences en timeline, formation
+- **Projects** : Liste de projets avec cards interactives et navigation fluide
+- **Project Detail** : Hero image, stack technique, fonctionnalités et **aperçus interactifs**
 
 ### Interactions
 - **Liens fonctionnels** : Email (mailto), GitHub, LinkedIn, site web via expo-linking
@@ -25,7 +25,7 @@ Application mobile portfolio interactive combinée à un CV, conçue comme un pr
 
 ---
 
-## 🏗️ Architecture & Stack Technique
+## Architecture & Stack Technique
 
 ### Stack
 | Technologie | Version | Usage |
@@ -72,42 +72,42 @@ Colors.text.primary         // #ffffff
 Colors.text.secondary       // #a1a1aa
 
 // Typographie
-FontSize.xs (10) → 5xl (48)
-FontWeight.regular → extrabold
+FontSize.xs (10) -> 5xl (48)
+FontWeight.regular -> extrabold
 
 // Spacing
-Spacing.xs (4) → xl (32)
+Spacing.xs (4) -> xl (32)
 
 // Border Radius
-BorderRadius.sm (4) → full (9999)
+BorderRadius.sm (4) -> full (9999)
 ```
 
 ---
 
-## 🎯 Bonnes Pratiques Implémentées
+## Bonnes Pratiques Implémentées
 
 ### Qualité du Code
-- ✅ **TypeScript strict** : Aucun `any`, interfaces pour toutes les props
-- ✅ **Navigation typée** : Routes et paramètres validés par le compilateur
-- ✅ **Composants réutilisables** : DRY principle, props flexibles
-- ✅ **Design system centralisé** : Cohérence visuelle garantie
-- ✅ **Linting** : ESLint avec règles Expo
-- ✅ **Type checking** : `tsc --noEmit` sans erreur
+- **TypeScript strict** : Aucun `any`, interfaces pour toutes les props
+- **Navigation typée** : Routes et paramètres validés par le compilateur
+- **Composants réutilisables** : DRY principle, props flexibles
+- **Design system centralisé** : Cohérence visuelle garantie
+- **Linting** : ESLint avec règles Expo
+- **Type checking** : `tsc --noEmit` sans erreur
 
 ### Performance
-- 🚀 **FlatList** : Pour les listes scrollables optimisées
-- 🚀 **useMemo** : Mémoïsation des calculs coûteux
-- 🚀 **React.memo** : Évite les re-renders inutiles
-- 🚀 **Animations natives** : 60fps avec Reanimated
+- **FlatList** : Pour les listes scrollables optimisées
+- **useMemo** : Mémoïsation des calculs coûteux
+- **React.memo** : Évite les re-renders inutiles
+- **Animations natives** : 60fps avec Reanimated
 
 ### Accessibilité
-- ♿ **Contrastes vérifiés** : WCAG AA compliant
-- ♿ **Tailles de texte** : Hiérarchie claire, lisibilité optimale
-- ♿ **Feedback tactile** : activeOpacity sur tous les TouchableOpacity
+- **Contrastes vérifiés** : WCAG AA compliant
+- **Tailles de texte** : Hiérarchie claire, lisibilité optimale
+- **Feedback tactile** : activeOpacity sur tous les TouchableOpacity
 
 ---
 
-## 🚀 Démarrage
+## Démarrage
 
 ### Prérequis
 - Node.js 18+
@@ -144,7 +144,7 @@ eas build --platform android
 
 ---
 
-## 📂 Structure des Fichiers
+## Structure des Fichiers
 
 ```
 portfolio-mobile/
@@ -171,7 +171,7 @@ portfolio-mobile/
 
 ---
 
-## 🛠️ Commandes Utiles
+## Commandes Utiles
 
 ```bash
 # Développement
@@ -185,7 +185,7 @@ npm run build          # Build de production (selon plateforme)
 
 ---
 
-## 📱 Captures d'Écran
+## Captures d'Écran
 
 | Home | Profile | Projects | Detail |
 |------|---------|----------|--------|
@@ -193,7 +193,7 @@ npm run build          # Build de production (selon plateforme)
 
 ---
 
-## 🤝 Contact
+## Contact
 
 - **Email** : [contact@valerian.dev](mailto:contact@valerian.dev)
 - **GitHub** : [@atyos35](https://github.com/atyos35)
@@ -202,7 +202,7 @@ npm run build          # Build de production (selon plateforme)
 
 ---
 
-## 📄 Licence
+## Licence
 
 Ce projet est open source et disponible sous licence MIT.
 
