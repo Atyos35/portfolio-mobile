@@ -76,6 +76,7 @@ const MAPPING: IconMapping = {
     'leaf.fill': 'eco',
     'eye.fill': 'visibility',
     'hand.wave.fill': 'pan-tool',
+    'envelope.fill': 'email',
 };
 
 export type IconSymbolName = keyof typeof MAPPING;

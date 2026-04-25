@@ -1,7 +1,10 @@
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import * as Linking from 'expo-linking';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import {
+    Image,
+    ImageStyle,
     ScrollView,
     StyleSheet,
     Text,
@@ -35,9 +38,10 @@ export default function HomeScreen(): React.ReactElement {
             <FadeIn delay={100} style={styles.heroSection}>
                 <View style={styles.avatarContainer}>
                     <View style={styles.avatar}>
-                        <Text style={styles.avatarText}>
-                            {profile.name.charAt(0)}
-                        </Text>
+                        <Image
+                            source={require('@/assets/images/profile_picture.jpg')}
+                            style={styles.avatarImage}
+                        />
                     </View>
                     <View style={styles.statusIndicator} />
                 </View>
@@ -75,12 +79,8 @@ export default function HomeScreen(): React.ReactElement {
             {/* Quick Stats */}
             <FadeIn delay={300} style={styles.statsSection}>
                 <View style={styles.statCard}>
-                    <Text style={styles.statNumber}>5+</Text>
+                    <Text style={styles.statNumber}>7+</Text>
                     <Text style={styles.statLabel}>Années d expérience</Text>
-                </View>
-                <View style={styles.statCard}>
-                    <Text style={styles.statNumber}>20+</Text>
-                    <Text style={styles.statLabel}>Projets livr&eacute;s</Text>
                 </View>
                 <View style={styles.statCard}>
                     <Text style={styles.statNumber}>15+</Text>
@@ -103,10 +103,24 @@ export default function HomeScreen(): React.ReactElement {
             <FadeIn delay={500} style={styles.socialSection}>
                 <Text style={styles.sectionTitle}>Me contacter</Text>
                 <View style={styles.socialRow}>
+                    {profile.email && (
+                        <TouchableOpacity
+                            style={styles.socialButton}
+                            onPress={() => {
+                                Linking.openURL(`mailto:${profile.email}`);
+                            }}
+                        >
+                            <IconSymbol name="envelope.fill" size={24} color={Colors.primary.light} />
+                        </TouchableOpacity>
+                    )}
                     {profile.social.github && (
                         <TouchableOpacity
                             style={styles.socialButton}
-                            onPress={() => { }}
+                            onPress={() => {
+                                if (profile.social.github) {
+                                    Linking.openURL(profile.social.github);
+                                }
+                            }}
                         >
                             <IconSymbol name="github" size={24} color={Colors.text.secondary} />
                         </TouchableOpacity>
@@ -114,23 +128,23 @@ export default function HomeScreen(): React.ReactElement {
                     {profile.social.linkedin && (
                         <TouchableOpacity
                             style={styles.socialButton}
-                            onPress={() => { }}
+                            onPress={() => {
+                                if (profile.social.linkedin) {
+                                    Linking.openURL(profile.social.linkedin);
+                                }
+                            }}
                         >
                             <IconSymbol name="linkedin" size={24} color={Colors.text.secondary} />
-                        </TouchableOpacity>
-                    )}
-                    {profile.social.twitter && (
-                        <TouchableOpacity
-                            style={styles.socialButton}
-                            onPress={() => { }}
-                        >
-                            <IconSymbol name="twitter" size={24} color={Colors.text.secondary} />
                         </TouchableOpacity>
                     )}
                     {profile.social.website && (
                         <TouchableOpacity
                             style={styles.socialButton}
-                            onPress={() => { }}
+                            onPress={() => {
+                                if (profile.social.website) {
+                                    Linking.openURL(profile.social.website);
+                                }
+                            }}
                         >
                             <IconSymbol name="globe" size={24} color={Colors.text.secondary} />
                         </TouchableOpacity>
@@ -166,15 +180,15 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
-        backgroundColor: Colors.primary.main,
+        backgroundColor: Colors.background.tertiary,
+        overflow: 'hidden',
         justifyContent: 'center',
         alignItems: 'center',
     } as ViewStyle,
-    avatarText: {
-        color: Colors.background.primary,
-        fontSize: 40,
-        fontWeight: FontWeight.bold,
-    } as TextStyle,
+    avatarImage: {
+        width: '100%',
+        height: '100%',
+    } as ImageStyle,
     statusIndicator: {
         position: 'absolute',
         bottom: 5,
@@ -202,6 +216,7 @@ const styles = StyleSheet.create({
         color: Colors.primary.light,
         fontSize: FontSize.xl,
         fontWeight: FontWeight.semibold,
+        textAlign: 'center',
         marginBottom: Spacing.sm,
     } as TextStyle,
     tagline: {

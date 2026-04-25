@@ -6,14 +6,14 @@ import { CVData, Education, Experience, Profile, Skill } from '../types/cv';
 
 export const profile: Profile = {
     name: 'Valérian',
-    title: 'Mobile Developer',
-    tagline: 'Crafting beautiful mobile experiences',
-    bio: 'Développeur mobile passionné spécialisé en React Native et Expo. Je conçois et développe des applications mobiles modernes, performantes et intuitives. Mon approche combine expertise technique et sens du design pour créer des produits digitaux d\'exception.',
-    location: 'Paris, France',
+    title: 'Développeur Full Stack Web & Mobile',
+    tagline: "Concepteur de solutions applicatives et d'interfaces utilisateur modernes",
+    bio: 'Concepteur développeur Full Stack, à l\'aise aussi bien sur le back-end que le front-end, je conçois et développe des applications web et mobiles modernes et performantes. J\'utilise des technologies comme PHP avec Symfony, ainsi que Node.js avec ou sans framework (notamment NestJS) côté serveur, et des frameworks JavaScript en TypeScript côté front. Mon approche allie rigueur technique et sens du produit pour créer des solutions fiables, évolutives et orientées utilisateur.',
+    location: 'Rennes, France',
+    email: 'valerian.guemene@gmail.com',
     social: {
-        github: 'https://github.com/atyos35',
-        linkedin: 'https://linkedin.com/in/valerian',
-        website: 'https://valerian.dev',
+        github: 'https://github.com/Atyos35/portfolio-mobile',
+        linkedin: 'https://www.linkedin.com/in/valerian-guemene/',
     },
 };
 
@@ -65,8 +65,8 @@ export const experiences: Experience[] = [
         current: true,
         description: 'Lead développeur sur des applications mobile React Native utilisées par plus de 500k utilisateurs. Architecture technique, mentoring et bonnes pratiques.',
         achievements: [
-            'Développement d\'une app React Native avec 500k+ utilisateurs actifs',
-            'Mise en place de l\'architecture CI/CD et des tests automatisés',
+            "Développement d'une app React Native avec 500k+ utilisateurs actifs",
+            "Mise en place de l'architecture CI/CD et des tests automatisés",
             'Mentoring de 3 développeurs juniors',
             'Réduction du temps de build de 40%',
         ],
@@ -80,10 +80,10 @@ export const experiences: Experience[] = [
         startDate: '2019-06',
         endDate: '2021-12',
         current: false,
-        description: 'Développement d\'applications mobile pour divers clients dans les secteurs retail, santé et fintech.',
+        description: "Développement d'applications mobile pour divers clients dans les secteurs retail, santé et fintech.",
         achievements: [
             'Livraison de 8 applications mobiles pour des clients variés',
-            'Intégration de paiements mobiles et fonctionnalités natives',
+            "Intégration de paiements mobiles et fonctionnalités natives",
             'Optimisation des performances et réduction des crashs de 60%',
         ],
         technologies: ['React Native', 'JavaScript', 'Redux', 'Firebase'],
@@ -99,7 +99,7 @@ export const experiences: Experience[] = [
         description: 'Développement frontend et backend pour des applications web progressives.',
         achievements: [
             'Création de dashboards analytiques interactifs',
-            'Migration d\'une app legacy vers React',
+            "Migration d'une app legacy vers React",
             'Implementation de tests unitaires et E2E',
         ],
         technologies: ['React', 'Node.js', 'MongoDB', 'Docker'],
@@ -120,8 +120,8 @@ export const education: Education[] = [
         endDate: '2017-07',
         description: 'Spécialisation en développement mobile et architectures distribuées.',
         highlights: [
-            'Mémoire sur l\'optimisation des performances React Native',
-            'Projet de fin d\'études : Application de santé mobile',
+            "Mémoire sur l'optimisation des performances React Native",
+            "Projet de fin d'études : Application de santé mobile",
             'Major de promotion',
         ],
     },
@@ -132,7 +132,7 @@ export const education: Education[] = [
         location: 'Orsay, France',
         startDate: '2012-09',
         endDate: '2015-06',
-        description: 'Fondamentaux de l\'informatique : algorithmes, structures de données, bases de données.',
+        description: "Fondamentaux de l'informatique : algorithmes, structures de données, bases de données.",
     },
 ];
 
