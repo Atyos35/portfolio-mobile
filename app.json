@@ -3,6 +3,7 @@
     "name": "portfolio-mobile",
     "slug": "portfolio-mobile",
     "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "portfoliomobile",
@@ -27,6 +28,7 @@
       "package": "com.atyos.portfoliomobile"
     },
     "web": {
+      "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
