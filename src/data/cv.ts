@@ -22,69 +22,68 @@ export const profile: Profile = {
 // ============================================
 
 export const skills: Skill[] = [
-    // Mobile
-    { id: 'm1', name: 'React Native', category: 'mobile', level: 'expert' },
-    { id: 'm2', name: 'TypeScript', category: 'mobile', level: 'expert' },
-    { id: 'm3', name: 'Expo', category: 'mobile', level: 'expert' },
-    { id: 'm4', name: 'StyleSheet', category: 'mobile', level: 'expert' },
-    { id: 'm5', name: 'Reanimated', category: 'mobile', level: 'advanced' },
-    { id: 'm6', name: 'Axios', category: 'mobile', level: 'advanced' },
-    { id: 'm7', name: 'TanStack Query', category: 'mobile', level: 'advanced' },
-    { id: 'm8', name: 'Authentification JWT', category: 'mobile', level: 'advanced' },
-
     // Langages
-    { id: 's1', name: 'PHP', category: 'langages', level: 'expert' },
-    { id: 's2', name: 'TypeScript', category: 'langages', level: 'expert' },
-    { id: 's3', name: 'JavaScript', category: 'langages', level: 'expert' },
+    { id: '1', name: 'PHP', category: 'langages', level: 'expert' },
+    { id: '2', name: 'TypeScript', category: 'langages', level: 'expert' },
+    { id: '3', name: 'JavaScript', category: 'langages', level: 'expert' },
 
-    // Frameworks
-    { id: 's4', name: 'Symfony 2-6', category: 'backend', level: 'expert' },
-    { id: 's5', name: 'NestJS', category: 'backend', level: 'advanced' },
-    { id: 's6', name: 'API Platform', category: 'backend', level: 'expert' },
-    { id: 's7', name: 'Vue.js 3', category: 'frontend', level: 'expert' },
-    { id: 's8', name: 'Nuxt.js', category: 'frontend', level: 'advanced' },
-    { id: 's9', name: 'Quasar', category: 'frontend', level: 'advanced' },
-    { id: 's10', name: 'React', category: 'frontend', level: 'advanced' },
-    { id: 's11', name: 'Pinia', category: 'frontend', level: 'advanced' },
+    // Backend
+    { id: '4', name: 'Symfony (5/6)', category: 'backend', level: 'expert' },
+    { id: '5', name: 'API Platform', category: 'backend', level: 'expert' },
+    { id: '6', name: 'NestJS', category: 'backend', level: 'advanced' },
 
     // Frontend
-    { id: 's12', name: 'Tailwind CSS', category: 'frontend', level: 'expert' },
-    { id: 's13', name: 'Bootstrap', category: 'frontend', level: 'expert' },
-    { id: 's14', name: 'Daisy UI', category: 'frontend', level: 'advanced' },
-    { id: 's15', name: 'jQuery', category: 'frontend', level: 'advanced' },
-    { id: 's16', name: 'Twig', category: 'frontend', level: 'expert' },
+    { id: '7', name: 'React', category: 'frontend', level: 'advanced' },
+    { id: '8', name: 'Vue.js 3', category: 'frontend', level: 'expert' },
+    { id: '9', name: 'Nuxt.js', category: 'frontend', level: 'advanced' },
 
-    // Build & Tools
-    { id: 's17', name: 'Webpack', category: 'tools', level: 'advanced' },
-    { id: 's18', name: 'Vite', category: 'tools', level: 'advanced' },
-    { id: 's19', name: 'Docker', category: 'tools', level: 'advanced' },
-    { id: 's20', name: 'Git', category: 'tools', level: 'expert' },
-    { id: 's21', name: 'GitHub Projects', category: 'tools', level: 'advanced' },
-    { id: 's22', name: 'ESLint', category: 'tools', level: 'advanced' },
-    { id: 's23', name: 'PHPStan', category: 'tools', level: 'advanced' },
-    { id: 's24', name: 'Postman', category: 'tools', level: 'advanced' },
+    // Mobile
+    { id: '10', name: 'React Native', category: 'mobile', level: 'expert' },
+    { id: '11', name: 'Expo', category: 'mobile', level: 'expert' },
 
-    // Base de données
-    { id: 's25', name: 'MySQL', category: 'backend', level: 'expert' },
-    { id: 's26', name: 'MongoDB', category: 'backend', level: 'intermediate' },
-    { id: 's27', name: 'PostgreSQL', category: 'backend', level: 'advanced' },
+    // State Management & Data
+    { id: '12', name: 'TanStack Query', category: 'state-management', level: 'advanced' },
+    { id: '13', name: 'Pinia', category: 'state-management', level: 'advanced' },
 
-    // Agilité & OS
-    { id: 's28', name: 'Scrum/Agile', category: 'soft', level: 'advanced' },
-    { id: 's29', name: 'Trello', category: 'tools', level: 'advanced' },
-    { id: 's30', name: 'Redmine', category: 'tools', level: 'advanced' },
-    { id: 's31', name: 'Linux', category: 'tools', level: 'advanced' },
-    { id: 's32', name: 'Windows', category: 'tools', level: 'expert' },
+    // Styling
+    { id: '14', name: 'Tailwind CSS', category: 'styling', level: 'expert' },
+    { id: '15', name: 'Bootstrap', category: 'styling', level: 'expert' },
+    { id: '16', name: 'DaisyUI', category: 'styling', level: 'advanced' },
+    { id: '17', name: 'StyleSheet (React Native)', category: 'styling', level: 'expert' },
 
-    // Testing & CI/CD
-    { id: 's33', name: 'Jest', category: 'tools', level: 'advanced' },
-    { id: 's34', name: 'Unit Testing', category: 'tools', level: 'advanced' },
-    { id: 's35', name: 'CI/CD', category: 'tools', level: 'advanced' },
+    // Bases de données
+    { id: '18', name: 'PostgreSQL', category: 'bases-de-donnees', level: 'advanced' },
+    { id: '19', name: 'MySQL', category: 'bases-de-donnees', level: 'expert' },
+    { id: '20', name: 'MongoDB', category: 'bases-de-donnees', level: 'intermediate' },
 
-    // IA
-    { id: 's36', name: 'GPT', category: 'tools', level: 'advanced' },
-    { id: 's37', name: 'Claude', category: 'tools', level: 'advanced' },
-    { id: 's38', name: 'Gemini', category: 'tools', level: 'advanced' },
+    // Outils & Environnement
+    { id: '21', name: 'Git', category: 'outils-environnement', level: 'expert' },
+    { id: '22', name: 'Docker', category: 'outils-environnement', level: 'advanced' },
+    { id: '23', name: 'Vite', category: 'outils-environnement', level: 'advanced' },
+    { id: '24', name: 'Webpack', category: 'outils-environnement', level: 'advanced' },
+    { id: '25', name: 'Linux / Windows', category: 'outils-environnement', level: 'expert' },
+
+    // Qualité & Tests
+    { id: '26', name: 'Jest', category: 'qualite-tests', level: 'advanced' },
+    { id: '27', name: 'ESLint', category: 'qualite-tests', level: 'advanced' },
+    { id: '28', name: 'PHPStan', category: 'qualite-tests', level: 'advanced' },
+    { id: '29', name: 'Tests unitaires', category: 'qualite-tests', level: 'advanced' },
+
+    // API & Communication
+    { id: '30', name: 'Axios', category: 'api-communication', level: 'advanced' },
+    { id: '31', name: 'Postman', category: 'api-communication', level: 'advanced' },
+    { id: '32', name: 'Authentification JWT', category: 'api-communication', level: 'advanced' },
+
+    // Gestion de projet
+    { id: '33', name: 'GitHub Projects', category: 'gestion-projet', level: 'advanced' },
+    { id: '34', name: 'Trello', category: 'gestion-projet', level: 'advanced' },
+    { id: '35', name: 'Redmine', category: 'gestion-projet', level: 'advanced' },
+    { id: '36', name: 'Scrum / Agile', category: 'gestion-projet', level: 'advanced' },
+
+    // IA & Outils modernes
+    { id: '37', name: 'GPT', category: 'ia-outils', level: 'advanced' },
+    { id: '38', name: 'Claude', category: 'ia-outils', level: 'advanced' },
+    { id: '39', name: 'Gemini', category: 'ia-outils', level: 'advanced' },
 ];
 
 // ============================================

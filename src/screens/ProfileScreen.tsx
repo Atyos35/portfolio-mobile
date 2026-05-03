@@ -16,22 +16,43 @@ import {
 import { Card, Tag } from '../components/ui';
 import { cvData, education, experiences, skills } from '../data/cv';
 import { BorderRadius, Colors, FontSize, FontWeight, Spacing } from '../styles/theme';
-import { SkillCategory } from '../types/cv';
 
-// Category labels and colors
-const categoryConfig: Record<SkillCategory, { label: string; color: string }> = {
-    frontend: { label: 'Frontend', color: Colors.primary.main },
-    backend: { label: 'Backend', color: Colors.secondary.main },
-    mobile: { label: 'Mobile', color: Colors.status.info },
+// Category labels and colors - Fully synchronized with data
+const categoryConfig: Record<string, { label: string; color: string }> = {
     langages: { label: 'Langages', color: Colors.primary.light },
-    tools: { label: 'Outils', color: Colors.status.warning },
-    design: { label: 'Design', color: Colors.status.success },
-    soft: { label: 'Soft Skills', color: Colors.text.secondary },
+    backend: { label: 'Backend', color: Colors.secondary.main },
+    frontend: { label: 'Frontend', color: Colors.primary.main },
+    mobile: { label: 'Mobile', color: Colors.status.info },
+    'state-management': { label: 'State Management & Data', color: Colors.status.warning },
+    styling: { label: 'Styling', color: Colors.primary.light },
+    'bases-de-donnees': { label: 'Bases de données', color: Colors.secondary.main },
+    'outils-environnement': { label: 'Outils & Environnement', color: Colors.status.warning },
+    'qualite-tests': { label: 'Qualité & Tests', color: Colors.status.info },
+    'api-communication': { label: 'API & Communication', color: Colors.primary.light },
+    'gestion-projet': { label: 'Gestion de projet', color: Colors.status.warning },
+    'ia-outils': { label: 'IA & Outils modernes', color: Colors.text.secondary },
 };
 
+// Category order for display - matches data structure exactly
+const categoryOrder = [
+    'langages',
+    'backend',
+    'frontend',
+    'mobile',
+    'state-management',
+    'styling',
+    'bases-de-donnees',
+    'outils-environnement',
+    'qualite-tests',
+    'api-communication',
+    'gestion-projet',
+    'ia-outils',
+];
+
 export default function ProfileScreen(): React.ReactElement {
-    const { isLargeScreen, containerMaxWidth, horizontalPadding } = useResponsiveLayout();
+    const { isLargeScreen, containerMaxWidth } = useResponsiveLayout();
     
+    // Group skills by category and filter out empty categories
     const skillsByCategory = useMemo(() => {
         const grouped: Record<string, typeof skills> = {};
         skills.forEach((skill) => {
@@ -42,6 +63,11 @@ export default function ProfileScreen(): React.ReactElement {
         });
         return grouped;
     }, []);
+
+    // Get categories in display order (only those with skills)
+    const displayedCategories = useMemo(() => {
+        return categoryOrder.filter(cat => skillsByCategory[cat] && skillsByCategory[cat].length > 0);
+    }, [skillsByCategory]);
 
     const formatDate = (dateStr: string): string => {
         const [year, month] = dateStr.split('-');
@@ -64,7 +90,7 @@ export default function ProfileScreen(): React.ReactElement {
             contentContainerStyle={[
                 styles.contentContainer,
                 isLargeScreen && { 
-                    paddingHorizontal: horizontalPadding,
+                    paddingHorizontal: 30,
                     alignItems: 'center',
                 },
             ]}
@@ -108,20 +134,25 @@ export default function ProfileScreen(): React.ReactElement {
             </View>
 
             {/* Skills Section */}
-            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
-                <View style={styles.section}>
-                    <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>Compétences</Text>
-                    {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%', alignSelf: 'center' } : undefined}>
+            <View style={styles.section}>
+                <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>Compétences</Text>
+                {displayedCategories.map((category) => {
+                    const categorySkills = skillsByCategory[category];
+                    const config = categoryConfig[category];
+                    if (!config || !categorySkills) return null;
+                    
+                    return (
                         <View key={category} style={styles.categoryGroup}>
                             <View style={styles.categoryHeader}>
                                 <View
                                     style={[
                                         styles.categoryDot,
-                                        { backgroundColor: categoryConfig[category as SkillCategory].color },
+                                        { backgroundColor: config.color },
                                     ]}
                                 />
                                 <Text style={styles.categoryLabel}>
-                                    {categoryConfig[category as SkillCategory].label}
+                                    {config.label}
                                 </Text>
                             </View>
                             <View style={styles.skillsRow}>
@@ -135,8 +166,9 @@ export default function ProfileScreen(): React.ReactElement {
                                 ))}
                             </View>
                         </View>
-                    ))}
-                </View>
+                    );
+                })}
+            </View>
             </View>
 
             {/* Experience Section */}
