@@ -1,7 +1,6 @@
 import { useWindowDimensions } from 'react-native';
 
 const BREAKPOINTS = {
-  mobile: 0,
   tablet: 768,
   desktop: 1024,
 };
@@ -15,13 +14,13 @@ export function useResponsiveLayout() {
   const isMobile = width < BREAKPOINTS.tablet;
   
   // Container max widths for large screens
-  const containerMaxWidth = isDesktop ? 800 : isTablet ? 600 : undefined;
+  const containerMaxWidth = isDesktop ? 800 : 600;
   
   // Button max widths for large screens
-  const buttonMaxWidth = isDesktop ? 300 : isTablet ? 250 : undefined;
+  const buttonMaxWidth = isDesktop ? 300 : 250;
   
   // Spacing adjustments for large screens
-  const horizontalPadding = isDesktop ? 40 : isTablet ? 30 : 20;
+  const horizontalPadding = isDesktop ? 40 : 30;
   
   return {
     width,

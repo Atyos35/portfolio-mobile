@@ -1,4 +1,5 @@
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { useResponsiveLayout } from '@/hooks/use-responsive-layout';
 import * as Linking from 'expo-linking';
 import React, { useMemo } from 'react';
 import {
@@ -29,6 +30,8 @@ const categoryConfig: Record<SkillCategory, { label: string; color: string }> = 
 };
 
 export default function ProfileScreen(): React.ReactElement {
+    const { isLargeScreen, containerMaxWidth, horizontalPadding } = useResponsiveLayout();
+    
     const skillsByCategory = useMemo(() => {
         const grouped: Record<string, typeof skills> = {};
         skills.forEach((skill) => {
@@ -58,149 +61,165 @@ export default function ProfileScreen(): React.ReactElement {
     return (
         <ScrollView
             style={styles.container}
-            contentContainerStyle={styles.contentContainer}
+            contentContainerStyle={[
+                styles.contentContainer,
+                isLargeScreen && { 
+                    paddingHorizontal: horizontalPadding,
+                    alignItems: 'center',
+                },
+            ]}
             showsVerticalScrollIndicator={false}
         >
             {/* Header */}
-            <View style={styles.header}>
-                <Text style={styles.headerTitle}>CV</Text>
-                <TouchableOpacity
-                    style={styles.contactButton}
-                    onPress={handleContactPress}
-                >
-                    <IconSymbol name="message.fill" size={18} color={Colors.primary.light} />
-                    <Text style={styles.contactButtonText}>Me contacter</Text>
-                </TouchableOpacity>
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <View style={styles.header}>
+                    <Text style={styles.headerTitle}>CV</Text>
+                    <TouchableOpacity
+                        style={styles.contactButton}
+                        onPress={handleContactPress}
+                    >
+                        <IconSymbol name="message.fill" size={18} color={Colors.primary.light} />
+                        <Text style={styles.contactButtonText}>Me contacter</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
             {/* Bio Section */}
-            <Card variant="elevated" padding="xl" style={styles.bioCard}>
-                <View style={styles.bioHeader}>
-                    <View style={styles.avatarLarge}>
-                        <Image
-                            source={require('@/assets/images/profile_picture.jpg')}
-                            style={styles.avatarImage}
-                        />
-                    </View>
-                    <View style={styles.bioInfo}>
-                        <Text style={styles.name}>{cvData.profile.name}</Text>
-                        <Text style={styles.title}>{cvData.profile.title}</Text>
-                        <View style={styles.locationRow}>
-                            <IconSymbol name="location.fill" size={14} color={Colors.text.tertiary} />
-                            <Text style={styles.locationText}>{cvData.profile.location}</Text>
-                        </View>
-                    </View>
-                </View>
-                <Text style={styles.bioText}>{cvData.profile.bio}</Text>
-            </Card>
-
-            {/* Skills Section */}
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Compétences</Text>
-                {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
-                    <View key={category} style={styles.categoryGroup}>
-                        <View style={styles.categoryHeader}>
-                            <View
-                                style={[
-                                    styles.categoryDot,
-                                    { backgroundColor: categoryConfig[category as SkillCategory].color },
-                                ]}
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <Card variant="elevated" padding="xl" style={styles.bioCard}>
+                    <View style={styles.bioHeader}>
+                        <View style={styles.avatarLarge}>
+                            <Image
+                                source={require('@/assets/images/profile_picture.jpg')}
+                                style={styles.avatarImage}
                             />
-                            <Text style={styles.categoryLabel}>
-                                {categoryConfig[category as SkillCategory].label}
-                            </Text>
                         </View>
-                        <View style={styles.skillsRow}>
-                            {categorySkills.map((skill) => (
-                                <Tag
-                                    key={skill.id}
-                                    label={skill.name}
-                                    variant="outline"
-                                    size="sm"
-                                />
-                            ))}
+                        <View style={styles.bioInfo}>
+                            <Text style={styles.name}>{cvData.profile.name}</Text>
+                            <Text style={styles.title}>{cvData.profile.title}</Text>
+                            <View style={styles.locationRow}>
+                                <IconSymbol name="location.fill" size={14} color={Colors.text.tertiary} />
+                                <Text style={styles.locationText}>{cvData.profile.location}</Text>
+                            </View>
                         </View>
                     </View>
-                ))}
+                    <Text style={[styles.bioText, isLargeScreen && styles.largeScreenBioText]}>{cvData.profile.bio}</Text>
+                </Card>
             </View>
 
-            {/* Experience Section */}
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Expériences</Text>
-                <View style={styles.timeline}>
-                    {experiences.map((exp, index) => (
-                        <View key={exp.id} style={styles.timelineItem}>
-                            <View style={styles.timelineMarker} />
-                            {index < experiences.length - 1 && <View style={styles.timelineLine} />}
-                            <Card variant="default" padding="lg" style={styles.timelineCard}>
-                                <View style={styles.timelineHeader}>
-                                    <View style={styles.timelineTitleSection}>
-                                        <Text style={styles.timelineTitle}>{exp.title}</Text>
-                                        <Text style={styles.timelineCompany}>{exp.company}</Text>
-                                    </View>
-                                    <View style={styles.timelineBadge}>
-                                        <Text style={styles.timelineBadgeText}>
-                                            {exp.current
-                                                ? `${formatDate(exp.startDate)} - Présent`
-                                                : `${formatDate(exp.startDate)} - ${formatDate(exp.endDate!)}`}
-                                        </Text>
-                                    </View>
-                                </View>
-                                <Text style={styles.timelineDescription}>{exp.description}</Text>
-                                <View style={styles.achievementsList}>
-                                    {exp.achievements.map((achievement, i) => (
-                                        <View key={i} style={styles.achievementItem}>
-                                            <IconSymbol name="checkmark" size={14} color={Colors.primary.light} />
-                                            <Text style={styles.achievementText}>{achievement}</Text>
-                                        </View>
-                                    ))}
-                                </View>
-                                <View style={styles.techStack}>
-                                    {exp.technologies.map((tech) => (
-                                        <Tag key={tech} label={tech} variant="primary" size="sm" />
-                                    ))}
-                                </View>
-                            </Card>
+            {/* Skills Section */}
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <View style={styles.section}>
+                    <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>Compétences</Text>
+                    {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
+                        <View key={category} style={styles.categoryGroup}>
+                            <View style={styles.categoryHeader}>
+                                <View
+                                    style={[
+                                        styles.categoryDot,
+                                        { backgroundColor: categoryConfig[category as SkillCategory].color },
+                                    ]}
+                                />
+                                <Text style={styles.categoryLabel}>
+                                    {categoryConfig[category as SkillCategory].label}
+                                </Text>
+                            </View>
+                            <View style={styles.skillsRow}>
+                                {categorySkills.map((skill) => (
+                                    <Tag
+                                        key={skill.id}
+                                        label={skill.name}
+                                        variant="outline"
+                                        size="sm"
+                                    />
+                                ))}
+                            </View>
                         </View>
                     ))}
                 </View>
             </View>
 
-            {/* Education Section */}
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Formation</Text>
-                {education.map((edu) => (
-                    <Card key={edu.id} variant="default" padding="lg" style={styles.educationCard}>
-                        <View style={styles.educationHeader}>
-                            <View style={styles.educationIcon}>
-                                <IconSymbol name="school.fill" size={24} color={Colors.primary.light} />
+            {/* Experience Section */}
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <View style={styles.section}>
+                    <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>Expériences</Text>
+                    <View style={styles.timeline}>
+                        {experiences.map((exp, index) => (
+                            <View key={exp.id} style={styles.timelineItem}>
+                                <View style={styles.timelineMarker} />
+                                {index < experiences.length - 1 && <View style={styles.timelineLine} />}
+                                <Card variant="default" padding="lg" style={styles.timelineCard}>
+                                    <View style={styles.timelineHeader}>
+                                        <View style={styles.timelineTitleSection}>
+                                            <Text style={styles.timelineTitle}>{exp.title}</Text>
+                                            <Text style={styles.timelineCompany}>{exp.company}</Text>
+                                        </View>
+                                        <View style={styles.timelineBadge}>
+                                            <Text style={styles.timelineBadgeText}>
+                                                {exp.current
+                                                    ? `${formatDate(exp.startDate)} - Présent`
+                                                    : `${formatDate(exp.startDate)} - ${formatDate(exp.endDate!)}`}
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <Text style={styles.timelineDescription}>{exp.description}</Text>
+                                    <View style={styles.achievementsList}>
+                                        {exp.achievements.map((achievement, i) => (
+                                            <View key={i} style={styles.achievementItem}>
+                                                <IconSymbol name="checkmark" size={14} color={Colors.primary.light} />
+                                                <Text style={styles.achievementText}>{achievement}</Text>
+                                            </View>
+                                        ))}
+                                    </View>
+                                    <View style={styles.techStack}>
+                                        {exp.technologies.map((tech) => (
+                                            <Tag key={tech} label={tech} variant="primary" size="sm" />
+                                        ))}
+                                    </View>
+                                </Card>
                             </View>
-                            <View style={styles.educationInfo}>
-                                <Text style={styles.educationDegree}>{edu.degree}</Text>
-                                <Text style={styles.educationSchool}>{edu.school}</Text>
-                                <View style={styles.educationMeta}>
-                                    <Text style={styles.educationLocation}>{edu.location}</Text>
-                                    <Text style={styles.educationDate}>
-                                        {formatDate(edu.startDate)} - {formatDate(edu.endDate)}
-                                    </Text>
+                        ))}
+                    </View>
+                </View>
+            </View>
+
+            {/* Education Section */}
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <View style={styles.section}>
+                    <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>Formation</Text>
+                    {education.map((edu) => (
+                        <Card key={edu.id} variant="default" padding="lg" style={styles.educationCard}>
+                            <View style={styles.educationHeader}>
+                                <View style={styles.educationIcon}>
+                                    <IconSymbol name="school.fill" size={24} color={Colors.primary.light} />
+                                </View>
+                                <View style={styles.educationInfo}>
+                                    <Text style={styles.educationDegree}>{edu.degree}</Text>
+                                    <Text style={styles.educationSchool}>{edu.school}</Text>
+                                    <View style={styles.educationMeta}>
+                                        <Text style={styles.educationLocation}>{edu.location}</Text>
+                                        <Text style={styles.educationDate}>
+                                            {formatDate(edu.startDate)} - {formatDate(edu.endDate)}
+                                        </Text>
+                                    </View>
                                 </View>
                             </View>
-                        </View>
-                        {edu.description && (
-                            <Text style={styles.educationDescription}>{edu.description}</Text>
-                        )}
-                        {edu.highlights && edu.highlights.length > 0 && (
-                            <View style={styles.highlightsList}>
-                                {edu.highlights.map((highlight, i) => (
-                                    <View key={i} style={styles.highlightItem}>
-                                        <IconSymbol name="star.fill" size={12} color={Colors.status.warning} />
-                                        <Text style={styles.highlightText}>{highlight}</Text>
-                                    </View>
-                                ))}
-                            </View>
-                        )}
-                    </Card>
-                ))}
+                            {edu.description && (
+                                <Text style={styles.educationDescription}>{edu.description}</Text>
+                            )}
+                            {edu.highlights && edu.highlights.length > 0 && (
+                                <View style={styles.highlightsList}>
+                                    {edu.highlights.map((highlight, i) => (
+                                        <View key={i} style={styles.highlightItem}>
+                                            <IconSymbol name="star.fill" size={12} color={Colors.status.warning} />
+                                            <Text style={styles.highlightText}>{highlight}</Text>
+                                        </View>
+                                    ))}
+                                </View>
+                            )}
+                        </Card>
+                    ))}
+                </View>
             </View>
 
             {/* Bottom padding */}
@@ -483,4 +502,13 @@ const styles = StyleSheet.create({
     bottomPadding: {
         height: Spacing.xl,
     } as ViewStyle,
+    // Large screen styles
+    largeScreenSectionTitle: {
+        fontSize: FontSize.xl,
+        marginBottom: Spacing.lg,
+    } as TextStyle,
+    largeScreenBioText: {
+        fontSize: FontSize.lg,
+        lineHeight: 28,
+    } as TextStyle,
 });

@@ -1,4 +1,5 @@
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { useResponsiveLayout } from '@/hooks/use-responsive-layout';
 import * as Linking from 'expo-linking';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -19,6 +20,7 @@ import { BorderRadius, Colors, FontSize, FontWeight, Spacing } from '../styles/t
 
 export default function HomeScreen(): React.ReactElement {
     const router = useRouter();
+    const { isLargeScreen, containerMaxWidth, buttonMaxWidth, horizontalPadding } = useResponsiveLayout();
 
     const handleViewProjects = (): void => {
         router.push('/(tabs)/projects');
@@ -31,129 +33,151 @@ export default function HomeScreen(): React.ReactElement {
     return (
         <ScrollView
             style={styles.container}
-            contentContainerStyle={styles.contentContainer}
+            contentContainerStyle={[
+                styles.contentContainer,
+                isLargeScreen && { 
+                    paddingHorizontal: horizontalPadding,
+                    alignItems: 'center',
+                },
+            ]}
             showsVerticalScrollIndicator={false}
         >
             {/* Hero Section */}
-            <FadeIn delay={100} style={styles.heroSection}>
-                <View style={styles.avatarContainer}>
-                    <View style={styles.avatar}>
-                        <Image
-                            source={require('@/assets/images/profile_picture.jpg')}
-                            style={styles.avatarImage}
-                        />
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <FadeIn delay={100} style={styles.heroSection}>
+                    <View style={styles.avatarContainer}>
+                        <View style={styles.avatar}>
+                            <Image
+                                source={require('@/assets/images/profile_picture.jpg')}
+                                style={styles.avatarImage}
+                            />
+                        </View>
+                        <View style={styles.statusIndicator} />
                     </View>
-                    <View style={styles.statusIndicator} />
-                </View>
 
-                <Text style={styles.greeting}>Bonjour, je suis</Text>
+                    <Text style={styles.greeting}>Bonjour, je suis</Text>
 
-                <Text style={styles.name}>{profile.name}</Text>
+                    <Text style={styles.name}>{profile.name}</Text>
 
-                <Text style={styles.title}>{profile.title}</Text>
+                    <Text style={styles.title}>{profile.title}</Text>
 
-                <Text style={styles.tagline}>{profile.tagline}</Text>
-            </FadeIn>
+                    <Text style={styles.tagline}>{profile.tagline}</Text>
+                </FadeIn>
+            </View>
 
             {/* Quick Actions */}
             <FadeIn delay={200} style={styles.actionsSection}>
-                <Button
-                    title="Voir mes projets"
-                    onPress={handleViewProjects}
-                    variant="primary"
-                    size="lg"
-                    fullWidth
-                />
+                <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                    <View style={isLargeScreen ? styles.largeScreenButtons : undefined}>
+                        <View style={isLargeScreen ? { maxWidth: buttonMaxWidth } : { width: '100%' }}>
+                            <Button
+                                title="Voir mes projets"
+                                onPress={handleViewProjects}
+                                variant="primary"
+                                size="lg"
+                                fullWidth={!isLargeScreen}
+                            />
+                        </View>
 
-                <View style={styles.actionSpacer} />
+                        <View style={isLargeScreen ? styles.largeScreenButtonSpacer : styles.actionSpacer} />
 
-                <Button
-                    title="Voir mon CV"
-                    onPress={handleViewProfile}
-                    variant="outline"
-                    size="lg"
-                    fullWidth
-                />
+                        <View style={isLargeScreen ? { maxWidth: buttonMaxWidth } : { width: '100%' }}>
+                            <Button
+                                title="Voir mon CV"
+                                onPress={handleViewProfile}
+                                variant="outline"
+                                size="lg"
+                                fullWidth={!isLargeScreen}
+                            />
+                        </View>
+                    </View>
+                </View>
             </FadeIn>
 
             {/* Quick Stats */}
-            <FadeIn delay={300} style={styles.statsSection}>
-                <View style={styles.statCard}>
-                    <Text style={styles.statNumber}>7+</Text>
-                    <Text style={styles.statLabel}>Années d expérience</Text>
-                </View>
-                <View style={styles.statCard}>
-                    <Text style={styles.statNumber}>15+</Text>
-                    <Text style={styles.statLabel}>Compétences</Text>
-                </View>
-            </FadeIn>
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <FadeIn delay={300} style={styles.statsSection}>
+                    <View style={styles.statCard}>
+                        <Text style={styles.statNumber}>7+</Text>
+                        <Text style={styles.statLabel}>Années d expérience</Text>
+                    </View>
+                    <View style={styles.statCard}>
+                        <Text style={styles.statNumber}>15+</Text>
+                        <Text style={styles.statLabel}>Compétences</Text>
+                    </View>
+                </FadeIn>
+            </View>
 
             {/* Bio Preview */}
-            <FadeIn delay={400} style={styles.bioSection}>
-                <Text style={styles.sectionTitle}>À propos</Text>
-                <Text style={styles.bioText}>{profile.bio}</Text>
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <FadeIn delay={400} style={styles.bioSection}>
+                    <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>À propos</Text>
+                    <Text style={[styles.bioText, isLargeScreen && styles.largeScreenBioText]}>{profile.bio}</Text>
 
-                <View style={styles.locationRow}>
-                    <IconSymbol name="location.fill" size={14} color={Colors.text.tertiary} />
-                    <Text style={styles.locationText}>{profile.location}</Text>
-                </View>
-            </FadeIn>
+                    <View style={styles.locationRow}>
+                        <IconSymbol name="location.fill" size={14} color={Colors.text.tertiary} />
+                        <Text style={styles.locationText}>{profile.location}</Text>
+                    </View>
+                </FadeIn>
+            </View>
 
             {/* Social Links */}
-            <FadeIn delay={500} style={styles.socialSection}>
-                <Text style={styles.sectionTitle}>Me contacter</Text>
-                <View style={styles.socialRow}>
-                    {profile.email && (
-                        <TouchableOpacity
-                            style={styles.socialButton}
-                            onPress={() => {
-                                Linking.openURL(`mailto:${profile.email}`);
-                            }}
-                        >
-                            <IconSymbol name="envelope.fill" size={24} color={Colors.primary.light} />
-                        </TouchableOpacity>
-                    )}
-                    {profile.social.github && (
-                        <TouchableOpacity
-                            style={styles.socialButton}
-                            onPress={() => {
-                                if (profile.social.github) {
-                                    Linking.openURL(profile.social.github);
-                                }
-                            }}
-                        >
-                            <IconSymbol name="github" size={24} color={Colors.text.secondary} />
-                        </TouchableOpacity>
-                    )}
-                    {profile.social.linkedin && (
-                        <TouchableOpacity
-                            style={styles.socialButton}
-                            onPress={() => {
-                                if (profile.social.linkedin) {
-                                    Linking.openURL(profile.social.linkedin);
-                                }
-                            }}
-                        >
-                            <Image
-                                source={require('@/assets/images/linkedin.png')}
-                                style={styles.linkedinIcon}
-                            />
-                        </TouchableOpacity>
-                    )}
-                    {profile.social.website && (
-                        <TouchableOpacity
-                            style={styles.socialButton}
-                            onPress={() => {
-                                if (profile.social.website) {
-                                    Linking.openURL(profile.social.website);
-                                }
-                            }}
-                        >
-                            <IconSymbol name="globe" size={24} color={Colors.text.secondary} />
-                        </TouchableOpacity>
-                    )}
-                </View>
-            </FadeIn>
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <FadeIn delay={500} style={styles.socialSection}>
+                    <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>Me contacter</Text>
+                    <View style={styles.socialRow}>
+                        {profile.email && (
+                            <TouchableOpacity
+                                style={styles.socialButton}
+                                onPress={() => {
+                                    Linking.openURL(`mailto:${profile.email}`);
+                                }}
+                            >
+                                <IconSymbol name="envelope.fill" size={24} color={Colors.primary.light} />
+                            </TouchableOpacity>
+                        )}
+                        {profile.social.github && (
+                            <TouchableOpacity
+                                style={styles.socialButton}
+                                onPress={() => {
+                                    if (profile.social.github) {
+                                        Linking.openURL(profile.social.github);
+                                    }
+                                }}
+                            >
+                                <IconSymbol name="github" size={24} color={Colors.text.secondary} />
+                            </TouchableOpacity>
+                        )}
+                        {profile.social.linkedin && (
+                            <TouchableOpacity
+                                style={styles.socialButton}
+                                onPress={() => {
+                                    if (profile.social.linkedin) {
+                                        Linking.openURL(profile.social.linkedin);
+                                    }
+                                }}
+                            >
+                                <Image
+                                    source={require('@/assets/images/linkedin.png')}
+                                    style={styles.linkedinIcon}
+                                />
+                            </TouchableOpacity>
+                        )}
+                        {profile.social.website && (
+                            <TouchableOpacity
+                                style={styles.socialButton}
+                                onPress={() => {
+                                    if (profile.social.website) {
+                                        Linking.openURL(profile.social.website);
+                                    }
+                                }}
+                            >
+                                <IconSymbol name="globe" size={24} color={Colors.text.secondary} />
+                            </TouchableOpacity>
+                        )}
+                    </View>
+                </FadeIn>
+            </View>
 
             {/* Bottom padding for safe area */}
             <View style={styles.bottomPadding} />
@@ -313,4 +337,23 @@ const styles = StyleSheet.create({
     bottomPadding: {
         height: Spacing.xl,
     } as ViewStyle,
+    // Large screen styles
+    largeScreenButtons: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: Spacing.md,
+        flexWrap: 'wrap',
+    } as ViewStyle,
+    largeScreenButtonSpacer: {
+        width: 0,
+        height: 0,
+    } as ViewStyle,
+    largeScreenSectionTitle: {
+        fontSize: FontSize.xl,
+    } as TextStyle,
+    largeScreenBioText: {
+        fontSize: FontSize.lg,
+        lineHeight: 28,
+    } as TextStyle,
 });

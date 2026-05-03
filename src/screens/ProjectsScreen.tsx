@@ -1,4 +1,5 @@
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { useResponsiveLayout } from '@/hooks/use-responsive-layout';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import {
@@ -14,6 +15,7 @@ import { Colors, FontSize, FontWeight, Spacing } from '../styles/theme';
 
 export default function ProjectsScreen(): React.ReactElement {
     const router = useRouter();
+    const { isLargeScreen, containerMaxWidth } = useResponsiveLayout();
 
     const handleProjectPress = (projectId: string): void => {
         router.push({
@@ -24,20 +26,24 @@ export default function ProjectsScreen(): React.ReactElement {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <View style={styles.headerLeft}>
-                    <IconSymbol name="briefcase.fill" size={24} color={Colors.primary.light} />
-                    <Text style={styles.headerTitle}>Mes Projets</Text>
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <View style={styles.header}>
+                    <View style={styles.headerLeft}>
+                        <IconSymbol name="briefcase.fill" size={24} color={Colors.primary.light} />
+                        <Text style={[styles.headerTitle, isLargeScreen && styles.largeScreenHeaderTitle]}>Mes Projets</Text>
+                    </View>
+                    <Text style={styles.headerSubtitle}>
+                        {PROJECTS.length} projet{PROJECTS.length > 1 ? 's' : ''}
+                    </Text>
                 </View>
-                <Text style={styles.headerSubtitle}>
-                    {PROJECTS.length} projet{PROJECTS.length > 1 ? 's' : ''}
-                </Text>
             </View>
-            <ProjectList
-                projects={PROJECTS}
-                onProjectPress={handleProjectPress}
-                containerStyle={styles.listContainer}
-            />
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%' } : undefined}>
+                <ProjectList
+                    projects={PROJECTS}
+                    onProjectPress={handleProjectPress}
+                    containerStyle={isLargeScreen ? { paddingHorizontal: 0 } : styles.listContainer}
+                />
+            </View>
         </View>
     );
 }
@@ -72,4 +78,8 @@ const styles = StyleSheet.create({
     listContainer: {
         paddingHorizontal: Spacing.xl,
     } as ViewStyle,
+    // Large screen styles
+    largeScreenHeaderTitle: {
+        fontSize: FontSize['3xl'],
+    } as TextStyle,
 });

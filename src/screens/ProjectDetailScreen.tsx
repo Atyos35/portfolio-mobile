@@ -1,4 +1,5 @@
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { useResponsiveLayout } from '@/hooks/use-responsive-layout';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
 import {
@@ -25,20 +26,23 @@ const techStack: Record<string, string[]> = {
 export default function ProjectDetailScreen(): React.ReactElement {
     const router = useRouter();
     const { id } = useLocalSearchParams<{ id: string }>();
+    const { isLargeScreen, containerMaxWidth, horizontalPadding } = useResponsiveLayout();
 
     const project: Project | undefined = PROJECTS.find((p) => p.id === id);
 
     if (!project) {
         return (
-            <View style={styles.errorContainer}>
-                <Text style={styles.errorText}>Projet non trouvé</Text>
-                <TouchableOpacity
-                    style={styles.backButton}
-                    onPress={() => router.push('/(tabs)/projects')}
-                >
-                    <IconSymbol name="arrow.left" size={16} color={Colors.primary.light} />
-                    <Text style={styles.backButtonText}>Retour</Text>
-                </TouchableOpacity>
+            <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%', alignSelf: 'center' } : undefined}>
+                <View style={styles.errorContainer}>
+                    <Text style={styles.errorText}>Projet non trouvé</Text>
+                    <TouchableOpacity
+                        style={styles.backButton}
+                        onPress={() => router.push('/(tabs)/projects')}
+                    >
+                        <IconSymbol name="arrow.left" size={16} color={Colors.primary.light} />
+                        <Text style={styles.backButtonText}>Retour</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -48,96 +52,98 @@ export default function ProjectDetailScreen(): React.ReactElement {
     return (
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
-            {/* Hero Image */}
-            <View style={styles.heroContainer}>
-                <Image source={{ uri: project.image }} style={styles.heroImage} />
-                <View style={styles.heroOverlay} />
-                <TouchableOpacity
-                    style={styles.backButtonAbsolute}
-                    onPress={() => router.push('/(tabs)/projects')}
-                >
-                    <IconSymbol name="arrow.left" size={20} color={Colors.text.primary} />
-                </TouchableOpacity>
-            </View>
-
-            {/* Content */}
-            <View style={styles.content}>
-                {/* Title Section */}
-                <View style={styles.titleSection}>
-                    <Text style={styles.title}>{project.title}</Text>
-                    <Text style={styles.description}>{project.description}</Text>
-                </View>
-
-                {/* Tech Stack */}
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Technologies</Text>
-                    <View style={styles.techContainer}>
-                        {projectTechStack.map((tech) => (
-                            <View key={tech} style={styles.techTag}>
-                                <Text style={styles.techText}>{tech}</Text>
-                            </View>
-                        ))}
+                {/* Hero Image */}
+                <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%', alignSelf: 'center' } : undefined}>
+                    <View style={styles.heroContainer}>
+                        <Image source={{ uri: project.image }} style={styles.heroImage} />
+                        <View style={styles.heroOverlay} />
+                        <TouchableOpacity
+                            style={styles.backButtonAbsolute}
+                            onPress={() => router.push('/(tabs)/projects')}
+                        >
+                            <IconSymbol name="arrow.left" size={20} color={Colors.text.primary} />
+                        </TouchableOpacity>
                     </View>
                 </View>
 
-                {/* About Section */}
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>À propos du projet</Text>
-                    <Text style={styles.sectionText}>
-                        Ce projet me permet de montrer concrètement ce que je sais faire en développement 
-                        mobile avec React Native et Expo, à travers une application moderne, performante et soignée.
-                    </Text>
-                </View>
+                {/* Content */}
+                <View style={isLargeScreen ? { maxWidth: containerMaxWidth, width: '100%', alignSelf: 'center', paddingHorizontal: horizontalPadding } : styles.content}>
+                    {/* Title Section */}
+                    <View style={styles.titleSection}>
+                        <Text style={[styles.title, isLargeScreen && styles.largeScreenTitle]}>{project.title}</Text>
+                        <Text style={[styles.description, isLargeScreen && styles.largeScreenDescription]}>{project.description}</Text>
+                    </View>
 
-                {/* Key Features */}
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Fonctionnalités clés</Text>
-                    <View style={styles.featuresList}>
-                        <View style={styles.featureItem}>
-                            <View style={styles.featureIcon}>
-                                <IconSymbol name="sparkles" size={16} color={Colors.primary.light} />
-                            </View>
-                            <Text style={styles.featureText}>Interface utilisateur moderne et intuitive</Text>
-                        </View>
-                        <View style={styles.featureItem}>
-                            <View style={styles.featureIcon}>
-                                <IconSymbol name="bolt.fill" size={16} color={Colors.primary.light} />
-                            </View>
-                            <Text style={styles.featureText}>Performance optimisée</Text>
-                        </View>
-                        <View style={styles.featureItem}>
-                            <View style={styles.featureIcon}>
-                                <IconSymbol name="phone.fill" size={16} color={Colors.primary.light} />
-                            </View>
-                            <Text style={styles.featureText}>Compatible iOS et Android</Text>
-                        </View>
-                        <View style={styles.featureItem}>
-                            <View style={styles.featureIcon}>
-                                <IconSymbol name="paintbrush.fill" size={16} color={Colors.primary.light} />
-                            </View>
-                            <Text style={styles.featureText}>Design soigné et cohérent</Text>
+                    {/* Tech Stack */}
+                    <View style={styles.section}>
+                        <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>Technologies</Text>
+                        <View style={styles.techContainer}>
+                            {projectTechStack.map((tech) => (
+                                <View key={tech} style={styles.techTag}>
+                                    <Text style={styles.techText}>{tech}</Text>
+                                </View>
+                            ))}
                         </View>
                     </View>
-                </View>
 
-                {/* Interactive Features Preview */}
-                {project.features && project.features.length > 0 && (
-                    <View style={styles.featuresSection}>
-                        <Text style={styles.sectionTitle}>Aperçu interactif</Text>
-                        <Text style={styles.sectionSubtitle}>
-                            Explorez les fonctionnalités de cette application
+                    {/* About Section */}
+                    <View style={styles.section}>
+                        <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>À propos du projet</Text>
+                        <Text style={[styles.sectionText, isLargeScreen && styles.largeScreenSectionText]}>
+                            Ce projet me permet de montrer concrètement ce que je sais faire en développement 
+                            mobile avec React Native, à travers une application moderne, performante et soignée.
                         </Text>
-                        {project.features.map((feature: ProjectFeatureUnion) => (
-                            <View key={feature.id} style={styles.featurePreviewContainer}>
-                                <FeatureRenderer feature={feature} />
-                            </View>
-                        ))}
                     </View>
-                )}
 
-                {/* Bottom padding */}
-                <View style={styles.bottomPadding} />
-            </View>
+                    {/* Key Features */}
+                    <View style={styles.section}>
+                        <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>Fonctionnalités clés</Text>
+                        <View style={styles.featuresList}>
+                            <View style={styles.featureItem}>
+                                <View style={styles.featureIcon}>
+                                    <IconSymbol name="sparkles" size={16} color={Colors.primary.light} />
+                                </View>
+                                <Text style={styles.featureText}>Interface utilisateur moderne et intuitive</Text>
+                            </View>
+                            <View style={styles.featureItem}>
+                                <View style={styles.featureIcon}>
+                                    <IconSymbol name="bolt.fill" size={16} color={Colors.primary.light} />
+                                </View>
+                                <Text style={styles.featureText}>Performance optimisée</Text>
+                            </View>
+                            <View style={styles.featureItem}>
+                                <View style={styles.featureIcon}>
+                                    <IconSymbol name="phone.fill" size={16} color={Colors.primary.light} />
+                                </View>
+                                <Text style={styles.featureText}>Compatible iOS et Android</Text>
+                            </View>
+                            <View style={styles.featureItem}>
+                                <View style={styles.featureIcon}>
+                                    <IconSymbol name="paintbrush.fill" size={16} color={Colors.primary.light} />
+                                </View>
+                                <Text style={styles.featureText}>Design soigné et cohérent</Text>
+                            </View>
+                        </View>
+                    </View>
+
+                    {/* Interactive Features Preview */}
+                    {project.features && project.features.length > 0 && (
+                        <View style={styles.featuresSection}>
+                            <Text style={[styles.sectionTitle, isLargeScreen && styles.largeScreenSectionTitle]}>Aperçu interactif</Text>
+                            <Text style={[styles.sectionSubtitle, isLargeScreen && styles.largeScreenSectionSubtitle]}>
+                                Explorez les fonctionnalités de cette application
+                            </Text>
+                            {project.features.map((feature: ProjectFeatureUnion) => (
+                                <View key={feature.id} style={styles.featurePreviewContainer}>
+                                    <FeatureRenderer feature={feature} />
+                                </View>
+                            ))}
+                        </View>
+                    )}
+
+                    {/* Bottom padding */}
+                    <View style={styles.bottomPadding} />
+                </View>
             </ScrollView>
         </View>
     );
@@ -302,4 +308,23 @@ const styles = StyleSheet.create({
     bottomPadding: {
         height: Spacing.xl,
     } as ViewStyle,
+    // Large screen styles
+    largeScreenTitle: {
+        fontSize: FontSize['3xl'],
+    } as TextStyle,
+    largeScreenDescription: {
+        fontSize: FontSize.lg,
+        lineHeight: 28,
+    } as TextStyle,
+    largeScreenSectionTitle: {
+        fontSize: FontSize.xl,
+        marginBottom: Spacing.lg,
+    } as TextStyle,
+    largeScreenSectionText: {
+        fontSize: FontSize.lg,
+        lineHeight: 28,
+    } as TextStyle,
+    largeScreenSectionSubtitle: {
+        fontSize: FontSize.base,
+    } as TextStyle,
 });
